@@ -1,23 +1,28 @@
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: Deployment
-# --- Everything below this comment is the same as a deployment ---
 metadata:
-  name: example-rollout
+name: rolling-update-test
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-     app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.15.4
-    ports:
-    - containerPort: 80
-  minReadySeconds: 30
-  revisionHistoryLimit: 3
- 
+replicas: 3
+minReadySeconds: 10
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+template:
+  metadata:
+    labels:
+      app: web-front-end
+      department: group3
+  spec:
+    containers:
+    - name: m-client-web
+      image: skarl/client:latest
+      env:
+      - name: PORT_ARGS
+        value: "--port=80"
+      ports:
+      - containerPort: 80
+        name: web-port
+        protocol: TCP
