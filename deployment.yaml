@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: webserver1
+      app: nginx
   replicas: 3
   strategy:
     type: RollingUpdate
@@ -15,10 +15,10 @@ spec:
   template:
     metadata:
       labels:
-        app: webserver1
+        app: nginx
     spec:
       containers:
-      - name: webserver1
-        image: vilasmankala/my-repo-test:webserver2
+      - name: nginx
+        image: nginx
         ports:
         - containerPort: 80 
