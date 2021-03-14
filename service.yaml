@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: rolling-update
   labels:
-    app: webserver1
+    app: nginx
 spec:
   selector:
-    app: webserver1
+    app: nginx
   type: NodePort
   ports:
   - port: 80
