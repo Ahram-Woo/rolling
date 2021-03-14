@@ -1,26 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: random-generator
+  name: recreate
 spec:
+  selector:
+    matchLabels:
+      app: recreate
   replicas: 3
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    selector:
-      matchLabels:
-        app: mynginx
-    template:
-      metadata:
-        labels:
-      app: random-generator
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: recreate
     spec:
       containers:
-      - name: random-generator
-        image: k8spatterns/random-generator: 1.0
-        readinessProbe:
-          exec:
-             command: [ "stat", "/random-renerator-ready" ]
-
+      - name: recreate
+        image: nginx
+        ports:
+        - containerPort: 80
