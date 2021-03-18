@@ -14,7 +14,7 @@ spec:
     - |
       while true
       do
-        APP_VERSION=`curl -s http://nginx/`
+        APP_VERSION=`nginx -v`
         echo "[`date`] $APP_VERSION "
         sleep 1
       done
