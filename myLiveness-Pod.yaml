@@ -3,7 +3,8 @@ apiVersion: v1
 metadata:
   name: liveness-probe-never-restart
 spec:
-  restartPolicy: Never
+  #restartPolicy: Never
+  restartPolicy: Always
   containers:
   - name: ubuntu-container
     image: ubuntu
