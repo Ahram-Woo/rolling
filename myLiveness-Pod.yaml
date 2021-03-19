@@ -10,11 +10,11 @@ spec:
     command:
         - /bin/bash
         - -ec
-        - touch /tmp/live; sleep 1; rm /tmp/live; sleep 2
+        - touch /tmp/live; sleep 30; rm /tmp/live; sleep 50
     livenessProbe:
        exec:
          command:
             - cat
             - /tmp/live
-       initialDelaySeconds: 2
-       periodSeconds: 2
+       initialDelaySeconds: 5
+       periodSeconds: 5
