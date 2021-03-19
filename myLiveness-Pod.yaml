@@ -1,17 +1,15 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: liveness-probe-never-restart
+  name: liveness-probe
 spec:
-  #restartPolicy: Never
-  restartPolicy: Always
   containers:
   - name: ubuntu-container
     image: ubuntu
     command:
         - /bin/bash
         - -ec
-        - touch /tmp/live; sleep 30; rm /tmp/live; sleep 100
+        - touch /tmp/live; sleep 30; rm /tmp/live; sleep 600
     livenessProbe:
        exec:
          command:
