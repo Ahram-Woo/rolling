@@ -1,20 +1,21 @@
-kind: Pod
 apiVersion: v1
+kind: Pod
 metadata:
-  name: liveness-probe
+  labels:
+    test: liveness
+  name: liveness-http
 spec:
-#  restartPolicy: Never
   containers:
-  - name: ubuntu-container
-    image: ubuntu
-    command:
-        - /bin/bash
-        - -ec
-        - touch /tmp/live; sleep 30; rm /tmp/live; sleep 100
+  - name: liveness
+    image: k8s.gcr.io/liveness
+    args:
+    - /server
     livenessProbe:
-       exec:
-         command:
-            - cat
-            - /tmp/live
-       initialDelaySeconds: 5
-       periodSeconds: 5
+      httpGet:
+        path: /healthz
+        port: 8080
+        httpHeaders:
+        - name: Custom-Header
+          value: Awesome
+      initialDelaySeconds: 3
+      periodSeconds: 3
