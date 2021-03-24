@@ -9,8 +9,8 @@ spec:
       app: springboot-web
     template:
       metadata:
-       labels:
-        app: springboot-web
+        labels:
+          app: springboot-web
       spec:
         containers:
           - name: springboot-web
@@ -20,9 +20,9 @@ spec:
               - containerPort: 8080
             livenessProbe:
               httpGet:
-               port: 8080
-               path: /api
-             initialDelaySeconds: 60
+                port: 8080
+                path: /api
+              initialDelaySeconds: 60
             readinessProbe:
               httpGet:
                 port: 8080
